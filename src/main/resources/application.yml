@@ -1,0 +1,58 @@
+server:
+  port: 8082
+
+spring:
+  profiles:
+    active: qa
+---
+spring:
+  profiles: dev
+  datasource:
+    driverClassName: org.h2.Driver
+    password: admin
+    url: jdbc:h2:mem:testapp
+    username: admin
+  h2:
+    console:
+      enabled: true
+  jpa:
+    database-platform: org.hibernate.dialect.H2Dialect
+welcome:
+  message: '"Welcome to the application"'
+
+---
+spring:
+  profiles: qa
+  datasource:
+    driverClassName: org.h2.Driver
+    password: admin
+    url: jdbc:h2:mem:testapp-qa
+    username: admin
+  h2:
+    console:
+      enabled: true
+  jpa:
+    database-platform: org.hibernate.dialect.H2Dialect
+welcome:
+  message: '"Welcome to the qa application"'
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"
+        exclude: "env,beans"
+---
+spring:
+  profiles: prod
+  datasource:
+    driverClassName: org.h2.Driver
+    password: admin
+    url: jdbc:h2:mem:testapp-prod
+    username: admin
+  h2:
+    console:
+      enabled: true
+  jpa:
+    database-platform: org.hibernate.dialect.H2Dialect
+welcome:
+  message: '"Welcome to the prod application"'
