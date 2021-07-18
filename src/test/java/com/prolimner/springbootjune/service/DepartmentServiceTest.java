@@ -36,7 +36,9 @@ class DepartmentServiceTest {
         Mockito.when(departmentRepository.findByDepartmentNameIgnoreCase("IT"))
                 .thenReturn(Optional.ofNullable(department));
 
-        Mockito.when(departmentRepository.save(department)).thenReturn(department);
+        if(department != null) {
+            Mockito.when(departmentRepository.save(department)).thenReturn(department);
+        }
     }
 
     @Test
